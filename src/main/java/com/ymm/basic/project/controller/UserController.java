@@ -57,7 +57,9 @@ public class UserController {
     )
     public ResultVo listUser(@Validated ListUserForm listUserForm){
     	//test
-        return ResultVoUtil.success(userService.listUser(listUserForm));
+        return ResultVoUtil.success(
+        		userService.listUser(listUserForm)
+		);
     }
 
     /**
