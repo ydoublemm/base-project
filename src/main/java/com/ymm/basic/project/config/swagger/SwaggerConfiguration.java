@@ -27,7 +27,7 @@ import java.util.Collection;
 @Configuration
 @EnableSwagger2
 @AllArgsConstructor
-@Profile({"dev", "test"})
+@Profile({"dev", "test","pre"})
 @EnableConfigurationProperties(SwaggerInfo.class)
 public class SwaggerConfiguration {
 
@@ -36,7 +36,6 @@ public class SwaggerConfiguration {
     @Bean
     public Docket createRestApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-				.enable(swaggerInfo.getEnable())
                 .groupName(swaggerInfo.getGroupName())
                 .useDefaultResponseMessages(false)
                 .enableUrlTemplating(false)

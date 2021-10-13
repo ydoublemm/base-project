@@ -48,9 +48,4 @@ public class SwaggerInfo {
 
 
 
-	/**
-	 * 开启 关闭
-	 */
-	private Boolean enable = false;
-
 }

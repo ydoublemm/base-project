@@ -11,9 +11,7 @@ spring:
     port: 6379
     password: 123456
 
-#禁用swagger
-swagger:
-  enable: false
+
 
 
 #OSS服务对应信息

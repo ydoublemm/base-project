@@ -40,6 +40,9 @@ spring:
 mybatis-plus:
   # xml路径
   mapper-locations: classpath:mapping/*Mapper.xml
+  # 输出日志
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 # 配置swagger
 swagger:
@@ -49,4 +52,3 @@ swagger:
   description: 接口文档
   # 扫描的包路径
   basePackage: com.ymm.basic.project.controller
-  enable: true
