@@ -15,47 +15,47 @@ public enum ResultEnum {
     /**
      * 未知异常
      */
-    UNKNOWN_EXCEPTION(100, "未知异常"),
+    UNKNOWN_EXCEPTION(10000, "未知异常"),
 
     /**
      * 格式错误
      */
-    FORMAT_ERROR(101, "参数格式错误"),
+    FORMAT_ERROR(10001, "参数格式错误"),
 
     /**
      * 超时
      */
-    TIME_OUT(102, "超时"),
+    TIME_OUT(10002, "超时"),
 
     /**
      * 添加失败
      */
-    ADD_ERROR(103, "添加失败"),
+    ADD_ERROR(10003, "添加失败"),
 
     /**
      * 更新失败
      */
-    UPDATE_ERROR(104, "更新失败"),
+    UPDATE_ERROR(10004, "更新失败"),
 
     /**
      * 删除失败
      */
-    DELETE_ERROR(105, "删除失败"),
+    DELETE_ERROR(10005, "删除失败"),
 
     /**
      * 查找失败
      */
-    GET_ERROR(106, "查找失败"),
+    GET_ERROR(10006, "查找失败"),
 
     /**
      * 参数类型不匹配
      */
-    ARGUMENT_TYPE_MISMATCH(107, "参数类型不匹配"),
+    ARGUMENT_TYPE_MISMATCH(10007, "参数类型不匹配"),
 
     /**
      * 请求方式不支持
      */
-    REQ_METHOD_NOT_SUPPORT(110,"请求方式不支持"),
+    REQ_METHOD_NOT_SUPPORT(10010,"请求方式不支持"),
     ;
 
     private Integer code;

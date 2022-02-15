@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ymm.basic.project.mapper.RoleResourcesMapper">
+
+    <select id="selectRoleResourcesInfoList" resultType="com.ymm.basic.project.vo.RoleResourcesVO">
+
+        select
+            a.role_id as roleId,
+            a.resources_id as resourcesId,
+            b.url as url
+        from system_role_resources a
+                 inner join system_resources b
+                            on a.resources_id  = b.id;
+
+    </select>
+
+
+</mapper>

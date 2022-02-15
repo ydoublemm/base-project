@@ -1,76 +1,113 @@
 package com.ymm.basic.project.controller;
 
 
-import com.ymm.basic.project.enums.ResultEnum;
-import com.ymm.basic.project.form.AddUserForm;
-import com.ymm.basic.project.form.ListUserForm;
+
+import com.ymm.basic.project.entity.User;
+import com.ymm.basic.project.model.CodeEnum;
+import com.ymm.basic.project.model.GetEasyUIData;
+import com.ymm.basic.project.model.Result;
 import com.ymm.basic.project.service.IUserService;
-import com.ymm.basic.project.utils.ResultVoUtil;
-import com.ymm.basic.project.vo.ResultVo;
-import com.ymm.basic.project.vo.UserVo;
+import com.ymm.basic.project.vo.UserAddModel;
+import com.ymm.basic.project.vo.UserPage;
+import com.ymm.basic.project.vo.UserVO;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
-import lombok.AllArgsConstructor;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
+ * <p>
+ * 前端控制器
+ * </p>
+ *
  * @author y
- * @date Created in 2020/3/6 4:30 下午
- * Utils: Intellij Idea
- * Description: 用户前端控制器
+ * @since 2021-09-19
  */
+@Api(value = "用户管理")
 @RestController
-@Api(tags = "用户")
-@AllArgsConstructor
-@RequestMapping("/user")
-public class UserController {
-
+@RequestMapping("/system/user")
+public class UserController extends BaseController {
+    @Autowired
     private IUserService userService;
 
-    /**
-     * 添加用户
-     * @param userForm 表单数据
-     * @return 成功或者失败
-     */
-    @ApiOperation("添加用户")
-    @PostMapping("/addUser")
-    public ResultVo addUser(@Validated @RequestBody AddUserForm userForm){
-        if(userService.addUser(userForm)){
-            return ResultVoUtil.success();
-        }else{
-            return ResultVoUtil.error(ResultEnum.ADD_ERROR);
-        }
+
+    @ApiOperation(value = "列表", httpMethod = "POST")
+    @PreAuthorize("hasAuthority('/system/user/list')")
+    @RequestMapping(value = "/list")
+    public Result list(@ModelAttribute UserPage user) {
+        GetEasyUIData list = userService.list(user);
+        return new Result(CodeEnum.SUCCESS.getCode(), list);
     }
 
-    /**
-     * 获取用户列表
-     * @param listUserForm 表单数据
-     * @return 用户列表
-     */
-    @ApiOperation("获取用户列表")
-    @GetMapping("/listUser")
-    @ApiResponses(
-            @ApiResponse(code = 200, message = "操作成功", response = UserVo.class)
-    )
-    public ResultVo listUser(@Validated ListUserForm listUserForm){
-    	//test
-        return ResultVoUtil.success(
-        		userService.listUser(listUserForm)
-		);
+    @ApiOperation(value = "增加", httpMethod = "POST")
+    @PreAuthorize("hasAuthority('/system/user/add')")
+    @RequestMapping(value = "/add")
+    public Result add(@ModelAttribute UserAddModel user) {
+        userService.add(user);
+        return new Result(CodeEnum.SUCCESS.getCode(), null);
+
     }
 
-    /**
-     * 删除用户
-     * @param id 用户编号
-     * @return 成功或者失败
-     */
-    @ApiOperation("删除用户")
-    @DeleteMapping("/deleteUser/{id}")
-    public ResultVo deleteUser(@PathVariable("id") String id){
+    @ApiOperation(value = "单条", httpMethod = "POST")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "id", paramType = "form"),
+    })
+    @RequestMapping(value = "/selectByPrimaryKey")
+    public Result selectByPrimaryKey(Long id) {
+        UserVO userVO = userService.selectVOByPrimaryKey(id);
+        return new Result(CodeEnum.SUCCESS.getCode(), userVO);
+    }
+
+    @ApiOperation(value = "更新", httpMethod = "POST")
+    @PreAuthorize("hasAuthority('/system/user/update')")
+    @RequestMapping(value = "/update")
+    public Result update(@ModelAttribute UserAddModel muser) {
+        userService.updateUser(muser);
+        return new Result(CodeEnum.SUCCESS.getCode(), null);
+
+    }
+
+    @ApiOperation(value = "删除", httpMethod = "POST")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "id", paramType = "form"),
+    })
+    @PreAuthorize("hasAuthority('/system/user/delete')")
+    @RequestMapping(value = "/delete")
+    public Result delete(Long[] id) {
         userService.deleteUser(id);
-        return ResultVoUtil.success();
+        return new Result(CodeEnum.SUCCESS.getCode(), null);
+
+    }
+
+    @ApiOperation(value = "是否重复", httpMethod = "POST")
+    @RequestMapping(value = "/findUserByUser")
+    public Result findUserByUser(@ModelAttribute User user) {
+        String r = userService.findTByT(user);
+        return new Result(r, null);
+
+    }
+
+    @ApiOperation(value = "密码查询", httpMethod = "POST")
+    @RequestMapping(value = "/toUpdatePassword")
+    public Result toUpdatePassword() {
+        String userDetails = (String) SecurityContextHolder.getContext()
+                .getAuthentication()
+                .getPrincipal();
+        User tByUsername = userService.findTByUsername(userDetails);
+        return new Result(CodeEnum.SUCCESS.getCode(), tByUsername);
+    }
+
+    @ApiOperation(value = "更改密码", httpMethod = "POST")
+    @RequestMapping(value = "/updatePassword")
+    public Result updatePassword(@ModelAttribute UserAddModel muser) {
+        userService.updatePassword(muser);
+        return new Result(CodeEnum.SUCCESS.getCode(), null);
+
     }
 }

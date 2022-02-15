@@ -9,26 +9,31 @@
 
 - Swagger在线接口文档。
 - CodeGenerator 代码生成器。
-- 统一返回。
-- 通用的分页对象。
-- 常用工具类。
-- 全局异常拦截。
-- 错误枚举。
-- 自定义异常。
+- 统一返回
+  - cn.com.citydo.starters.web.support.result.R。
+- 分页对象 
+  - 建议使用 mybatis-plus。
+- 常用工具类:文件工具类
+  - cn.com.citydo.starters.web.support.multipart.MultipartFileConvert。
+- 全局异常拦截
+  - cn.com.citydo.starters.web.support.advice.DefaultExceptionAdvice。
+- 错误枚举、自定义异常
+  - 实现cn.com.citydo.starters.web.support.exceptions.IErrorCode 或者继承 cn.com.citydo.starters.web.support.result:ReturnMessage。
 - 多环境配置文件。
 - Maven多环境配置。
 - 日志配置。
 - JenkinsFile。
 
-> 可以在评论区进行补充
+
 
 -----
 
 ### Swagger
 
 &emsp;&emsp;写接口文档通常是一件比较头疼的事情，然而swagger就用是用来帮我们解决这个问题的。可以在线生成接口文档，并且可以在页面上进行测试。
+地址: http://localhost:8080/doc.html
+![](https://gitee.com/caojidasabi/pic/raw/master/swagger.png)
 
-![](https://images.gitee.com/uploads/images/2020/0307/221947_26123776_1740559.png)
 
 &emsp;&emsp;可以非常清楚的显示，请求数据已经响应数据。当然这一切都需要在代码中进行配置。
 

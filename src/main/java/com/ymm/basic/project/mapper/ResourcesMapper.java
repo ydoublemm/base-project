@@ -1,7 +1,8 @@
 package com.ymm.basic.project.mapper;
 
+
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.ymm.basic.project.entity.User;
+import com.ymm.basic.project.entity.Resources;
 
 /**
  * <p>
@@ -11,6 +12,6 @@ import com.ymm.basic.project.entity.User;
  * @author y
  * @since 2021-09-18
  */
-public interface UserMapper extends BaseMapper<User> {
+public interface ResourcesMapper extends BaseMapper<Resources> {
 
 }

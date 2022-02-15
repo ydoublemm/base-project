@@ -55,7 +55,7 @@ swagger:
   version: 2.0
   groupName: 基础项目
   title: 基础项目
-  description: 接口文档
+  description: 接口文档UserDetailsServiceAutoConfiguration
   # 扫描的包路径
   basePackage: com.ymm.basic.project.controller
 

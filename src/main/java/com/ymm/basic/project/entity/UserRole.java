@@ -17,49 +17,17 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("system_user")
-public class User implements Serializable {
+@TableName("system_user_role")
+public class UserRole implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    private String username;
+    private Long userId;
 
-    private String password;
-
-
-	/**
-	 * 用户唯一code-2.0浙政钉
-	 */
-	private String userCode;
-
-	/**
-	 * 用户名称
-	 */
-	private String userName;
-
-	/**
-	 * 部门code
-	 */
-	private String orgCode;
-
-	/**
-	 * 部门名称
-	 */
-	private String orgName;
-
-	/**
-	 * 所属区域code
-	 */
-	private String areaCode;
-
-	/**
-	 * 地区名称
-	 */
-	private String areaName;
+    private Long roleId;
 
 
-	private Integer status;
 }
