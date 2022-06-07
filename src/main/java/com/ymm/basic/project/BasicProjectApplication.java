@@ -1,8 +1,11 @@
 package com.ymm.basic.project;
 
+
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.util.HashSet;
 
 /**
  * @author y
@@ -14,8 +17,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @MapperScan("com.ymm.basic.project.mapper")
 public class BasicProjectApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(BasicProjectApplication.class, args);
-    }
+//    public static void main(String[] args) {
+//        SpringApplication.run(BasicProjectApplication.class, args);
+//
+//
+//    }
+
+
+
+
+
 
 }

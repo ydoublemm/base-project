@@ -22,7 +22,7 @@ public class CodeGenerator {
     /**
      * 数据库链接地址
      */
-    private static final String URL = "jdbc:mysql://10.0.0.53:3306/basic_project?useUnicode=true&useSSL=false&characterEncoding=utf8";
+    private static final String URL = "jdbc:mysql://localhost:3306/BiLi?useUnicode=true&useSSL=false&characterEncoding=utf8";
 
     /**
      * 驱动
@@ -37,7 +37,7 @@ public class CodeGenerator {
     /**
      * 密码
      */
-    private static final String PASSWORD = "1470634109";
+    private static final String PASSWORD = "root";
 
     /**
      * 作者
@@ -196,7 +196,7 @@ public class CodeGenerator {
      */
     public static void main(String[] args) {
         // 执行
-        getAutoGenerator("user").execute();
+        getAutoGenerator("up_overview").execute();
     }
 
 }
